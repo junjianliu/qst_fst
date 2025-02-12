@@ -186,7 +186,7 @@ library(vcd)
 library(gridExtra)
 require(MASS)
 nulls <- c('single-locus Nei', 'single-locus WC', 'LK Nei RoA', 'LK Nei AoR', 'LK WC RoA', 'LK WC AoR', 'Koch MVN', 'common variants Nei', 'common variants WC')
-pal <- c('#8c510a', '#01665e', '#d01c8b','#998ec3','#ef8a62', '#1b9e77', '#542788','#f1a340','#a1dab4')
+pal <- c('#CC6677', '#117733', '#88CCEE','#882255','#999933', '#44AA99', '#332288','#DDCC77','#AA4499')
 
 
 
@@ -442,8 +442,7 @@ Fsts.Nei <- locus.Fsts.Nei(gens, n)
 Fsts.WC <- locus.Fsts.WC(gens, n)
 
 
-png(paste0("figures/raw/fig3/8D_migration_island_QST_RB.png"),
-    width = 2100, height = 2100, res = 300)
+pdf(paste0("figures/Figure_3.pdf"), width = 7, height = 7)
 
 par(oma = c(4,4,1,1), mfrow=c(2,2), mar=c(2,2,1,1))
 for (i in 1:4){
@@ -451,8 +450,8 @@ for (i in 1:4){
        ylim=c(0,35),
        xlab = "", ylab = "", yaxt = "n", cex.lab=2, cex.axis=1.5)
   axis(2, las = 1, cex.axis = 1.5)
-  lines(density(Fsts.Nei), col = '#8c510a', lwd = 2)
-  lines(density(Fsts.WC), col = '#01665e', lwd = 2)
+  lines(density(Fsts.Nei), col = '#CC6677', lwd = 2)
+  lines(density(Fsts.WC), col = '#117733', lwd = 2)
   l = 10^(i-1)
   if (l==1) lable="locus" else lable="loci"
   legend("topright", bty = "n", lwd = 0,
@@ -462,7 +461,7 @@ par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
 title(ylab="Density", line=-2, cex.lab=2)
 title(xlab = expression(Q[ST]^RB), line=-3, cex.lab=2)
-legend("bottom", bty = "n", col = c('#8c510a', '#01665e'), lwd = 2, horiz = TRUE, xpd = TRUE,
+legend("bottom", bty = "n", col = c('#CC6677', '#117733'), lwd = 2, horiz = TRUE, xpd = TRUE,
        legend = c("single-locus Nei", "single-locus WC"),
        cex = 1.5)
 
@@ -487,8 +486,7 @@ lkwra.dens <- dchisq((8 - 1) * Fstat / WC.RoA, df = 8 - 1) * (8 - 1) / WC.RoA
 lkwar.dens <- dchisq((8 - 1) * Fstat / WC.AoR, df = 8 - 1) * (8 - 1) / WC.AoR
 
 
-png(paste0("figures/raw/fig4/8D_split_star_QST_RB.png"),
-    width = 2100, height = 2100, res = 300)
+pdf(paste0("figures/Figure_4.pdf"), width = 7, height = 7)
 
 par(oma = c(4,4,1,1), mfrow=c(2,2), mar=c(2,2,1,1))
 for (i in 1:4){
@@ -496,10 +494,10 @@ for (i in 1:4){
        ylim=c(0,35),
        xlab = "", ylab = "", yaxt = "n", cex.lab=2, cex.axis=1.5)
   axis(2, las = 1, cex.axis = 1.5)
-  lines(Fstat, lknra.dens, col = '#d01c8b', lwd = 2)
-  lines(Fstat, lknar.dens, col = '#998ec3', lwd = 2)
-  lines(Fstat, lkwra.dens, col = '#ef8a62', lwd = 2)
-  lines(Fstat, lkwar.dens, col = '#1b9e77', lwd = 2)
+  lines(Fstat, lknra.dens, col = '#88CCEE', lwd = 2)
+  lines(Fstat, lknar.dens, col = '#882255', lwd = 2)
+  lines(Fstat, lkwra.dens, col = '#999933', lwd = 2)
+  lines(Fstat, lkwar.dens, col = '#44AA99', lwd = 2)
   l = 10^(i-1)
   if (l==1) lable="locus" else lable="loci"
   legend("topright", bty = "n", lwd = 0,
@@ -509,7 +507,7 @@ par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
 title(ylab="Density", line=-2, cex.lab=2)
 title(xlab = expression(Q[ST]^RB), line=-3, cex.lab=2)
-legend("bottom", bty = "n", col = c('#d01c8b','#998ec3','#ef8a62','#1b9e77'), lwd = 2, horiz = TRUE, xpd = TRUE,
+legend("bottom", bty = "n", col = c('#88CCEE','#882255','#999933','#44AA99'), lwd = 2, horiz = TRUE, xpd = TRUE,
        legend = c('LK Nei RoA', 'LK Nei AoR', 'LK WC RoA', 'LK WC AoR'),
        cex = 1.2)
 
@@ -556,14 +554,14 @@ for (model in c("migration_circular")){
            ylim=c(0,15),
            xlab = "", ylab = "", yaxt = "n", cex.lab=2, cex.axis=2)
       axis(2, las = 1, cex.axis = 2)
-      lines(density(Fsts.Nei.cv), col = '#f1a340', lwd = 2)
-      lines(Fstat, lknra.dens, col = '#d01c8b', lwd = 2)
-      lines(density(Koch.mvn), col = '#542788', lwd = 2)
+      lines(density(Fsts.Nei.cv), col = '#DDCC77', lwd = 2)
+      lines(Fstat, lknra.dens, col = '#88CCEE', lwd = 2)
+      lines(density(Koch.mvn), col = '#332288', lwd = 2)
       title(ylab="Density", line=4, cex.lab=2.5)
       title(xlab = expression(Q[ST]^RB), line=4, cex.lab=2.5)
       legend("topright", bty = "n", lwd = 0,
              legend = bquote(.(demes) ~ "demes"), cex = 1.6)
-      legend("topleft", bty = "n", col = c('#f1a340','#d01c8b','#542788'), lwd = 2,
+      legend("topleft", bty = "n", col = c('#DDCC77','#88CCEE','#332288'), lwd = 2,
              legend = c('common variants Nei', 'LK Nei RoA', 'Koch MVN'),
              cex = 1.6)
       
@@ -578,13 +576,13 @@ for (model in c("migration_circular")){
            bty = "n", ylab = "", xlab = "", xaxt = "n", yaxt = "n")
       axis(1, at = c(0, 1, 2, 3), labels = c("1", "10", "100", "1000"), cex.axis = 2)
       axis(2, las = 1, cex.axis = 2)
-      points(log10(c(1, 10, 100, 1000)) - 0.05, colMeans(Qstmat > locusNeiCv.cut)[c(1,3,5,7)], col = '#f1a340', pch = 19)
-      points(log10(c(1, 10, 100, 1000)), colMeans(Qstmat > lknra.cut)[c(1,3,5,7)], col = '#d01c8b', pch = 19)
-      points(log10(c(1, 10, 100, 1000)) + 0.05, colMeans(Qstmat > Mvn.cut)[c(1,3,5,7)], col = '#542788', pch = 19)
+      points(log10(c(1, 10, 100, 1000)) - 0.05, colMeans(Qstmat > locusNeiCv.cut)[c(1,3,5,7)], col = '#DDCC77', pch = 19)
+      points(log10(c(1, 10, 100, 1000)), colMeans(Qstmat > lknra.cut)[c(1,3,5,7)], col = '#88CCEE', pch = 19)
+      points(log10(c(1, 10, 100, 1000)) + 0.05, colMeans(Qstmat > Mvn.cut)[c(1,3,5,7)], col = '#332288', pch = 19)
       lines(c(0,100), c(.05, .05), lty = 2, col = "grey")
       title(ylab="Type I error rate", line=5, cex.lab=2.5)
       title(xlab = "Number of causal loci", line=3, cex.lab=2.5)
-      legend("topleft", bty = "n", col = c('#f1a340','#d01c8b','#542788'), pch = c(19, 19, 19),
+      legend("topleft", bty = "n", col = c('#DDCC77','#88CCEE','#332288'), pch = c(19, 19, 19),
              legend = c('common variants Nei', 'LK Nei RoA', 'Koch MVN'), cex = 1.6)
       legend("topright", bty = "n", lwd = 0,
              legend = bquote(.(demes) ~ "demes"), cex = 1.6)
@@ -594,21 +592,21 @@ for (model in c("migration_circular")){
       lb <-colMeans(Qstmat > locusNeiCv.cut) - 2*se
       ub <-colMeans(Qstmat > locusNeiCv.cut) + 2*se
       for(i in c(1,3,5,7)){
-        lines(rep(floor((i - 1)/2)  - .05, 2), c(lb[i], ub[i]), col = '#f1a340', lwd = 2)
+        lines(rep(floor((i - 1)/2)  - .05, 2), c(lb[i], ub[i]), col = '#DDCC77', lwd = 2)
       }
       
       se <- sqrt(colMeans(Qstmat > lknra.cut)*(1 - colMeans(Qstmat > lknra.cut))/nrow(Qstmat))
       lb <-colMeans(Qstmat > lknra.cut) - 2*se
       ub <-colMeans(Qstmat > lknra.cut) + 2*se
       for(i in c(1,3,5,7)){
-        lines(rep(floor((i - 1)/2), 2), c(lb[i], ub[i]), col = '#d01c8b', lwd = 2)
+        lines(rep(floor((i - 1)/2), 2), c(lb[i], ub[i]), col = '#88CCEE', lwd = 2)
       }
       
       se <- sqrt(colMeans(Qstmat > Mvn.cut)*(1 - colMeans(Qstmat > Mvn.cut))/nrow(Qstmat))
       lb <-colMeans(Qstmat > Mvn.cut) - 2*se
       ub <-colMeans(Qstmat > Mvn.cut) + 2*se
       for(i in c(1,3,5,7)){
-        lines(rep(floor((i - 1)/2) + .05, 2), c(lb[i], ub[i]), col = '#542788', lwd = 2)
+        lines(rep(floor((i - 1)/2) + .05, 2), c(lb[i], ub[i]), col = '#332288', lwd = 2)
       }
       
       dev.off()
@@ -641,18 +639,18 @@ getER.A <- function(Qstvec, lknra.cut, lknar.cut){
        bty = "n", ylab = "", xlab = "", xaxt = "n", yaxt = "n")
   axis(1, at = c(0, 1, 2, 3), labels = c("1", "10", "100", "1000"), cex.axis = 2)
   axis(2, las = 1, cex.axis = 2)
-  points(log10(c(1, 10, 100, 1000)) - 0.025, er1[c(1,3,5,7)], col = '#d01c8b', pch = 19)
-  points(log10(c(1, 10, 100, 1000)) + 0.025, er2[c(1,3,5,7)], col = '#998ec3', pch = 19)
+  points(log10(c(1, 10, 100, 1000)) - 0.025, er1[c(1,3,5,7)], col = '#88CCEE', pch = 19)
+  points(log10(c(1, 10, 100, 1000)) + 0.025, er2[c(1,3,5,7)], col = '#882255', pch = 19)
   lines(c(0,100), c(.05, .05), lty = 2, col = "grey")
   title(ylab="Type I error rate", line=5, cex.lab=2.5)
   title(xlab = "Number of causal loci", line=3, cex.lab=2.5)
-  legend("topleft", bty = "n", col = c('#d01c8b','#998ec3'), pch = c(19, 19),
+  legend("topleft", bty = "n", col = c('#88CCEE','#882255'), pch = c(19, 19),
          legend = c('LK Nei RoA', 'LK Nei AoR'), cex = 1.6)
   legend("topright", bty = "n", lwd = 0,
          legend = bquote(.(demes) ~ "demes"), cex = 1.6)
   for(i in c(1,3,5,7)){
-    lines(rep(floor((i - 1)/2) - .025, 2), c(lb1[i], ub1[i]), col = '#d01c8b', lwd = 2)
-    lines(rep(floor((i - 1)/2) + .025, 2), c(lb2[i], ub2[i]), col = '#998ec3', lwd = 2)
+    lines(rep(floor((i - 1)/2) - .025, 2), c(lb1[i], ub1[i]), col = '#88CCEE', lwd = 2)
+    lines(rep(floor((i - 1)/2) + .025, 2), c(lb2[i], ub2[i]), col = '#882255', lwd = 2)
   }
 }
 
@@ -671,17 +669,17 @@ getER.B <- function(Qstvec, lknra.cut){
        bty = "n", ylab = "", xlab = "", xaxt = "n", yaxt = "n")
   axis(1, at = c(0, 1, 2, 3), labels = c("1", "10", "100", "1000"), cex.axis = 2)
   axis(2, las = 1, cex.axis = 2)
-  points(log10(c(1, 10, 100, 1000)), er[c(1,3,5,7)], col = '#d01c8b', pch = 19)
-  points(log10(c(1, 10, 100, 1000)), er[c(2,4,6,8)], col = '#d01c8b', pch = 9)
+  points(log10(c(1, 10, 100, 1000)), er[c(1,3,5,7)], col = '#88CCEE', pch = 19)
+  points(log10(c(1, 10, 100, 1000)), er[c(2,4,6,8)], col = '#88CCEE', pch = 9)
   lines(c(0,100), c(.05, .05), lty = 2, col = "grey")
   title(ylab="Type I error rate", line=5, cex.lab=2.5)
   title(xlab = "Number of causal loci", line=3, cex.lab=2.5)
-  legend("topleft", bty = "n", col = c('#d01c8b','black','black'), pch = c(19,19,9),
+  legend("topleft", bty = "n", col = c('#88CCEE','black','black'), pch = c(19,19,9),
          legend = c('LK Nei RoA', expression("RB"~Q[ST]), expression("PBS"~Q[ST])), cex = 1.6)
   legend("topright", bty = "n", lwd = 0,
          legend = bquote(.(demes) ~ "demes"), cex = 1.6)
   for(i in 1:8){
-    lines(rep(floor((i - 1)/2), 2), c(lb[i], ub[i]), col = '#d01c8b', lwd = 2)
+    lines(rep(floor((i - 1)/2), 2), c(lb[i], ub[i]), col = '#88CCEE', lwd = 2)
   }
 }
 
@@ -709,20 +707,20 @@ getER.C <- function(Qstvec, locusNei.cut, locusNeiCv.cut, Mvn.cut){
        bty = "n", ylab = "", xlab = "", xaxt = "n", yaxt = "n")
   axis(1, at = c(0, 1, 2, 3), labels = c("1", "10", "100", "1000"), cex.axis = 2)
   axis(2, las = 1, cex.axis = 2)
-  points(log10(c(1, 10, 100, 1000)) - 0.05, er1[c(1,3,5,7)], col = '#8c510a', pch = 19)
-  points(log10(c(1, 10, 100, 1000)), er2[c(1,3,5,7)], col = '#f1a340', pch = 19)
-  points(log10(c(1, 10, 100, 1000)) + 0.05, er3[c(1,3,5,7)], col = '#542788', pch = 19)
+  points(log10(c(1, 10, 100, 1000)) - 0.05, er1[c(1,3,5,7)], col = '#CC6677', pch = 19)
+  points(log10(c(1, 10, 100, 1000)), er2[c(1,3,5,7)], col = '#DDCC77', pch = 19)
+  points(log10(c(1, 10, 100, 1000)) + 0.05, er3[c(1,3,5,7)], col = '#332288', pch = 19)
   lines(c(0,100), c(.05, .05), lty = 2, col = "grey")
   title(ylab="Type I error rate", line=5, cex.lab=2.5)
   title(xlab = "Number of causal loci", line=3, cex.lab=2.5)
-  legend("topleft", bty = "n", col = c('#8c510a','#f1a340','#542788'), pch = c(19,19,19),
+  legend("topleft", bty = "n", col = c('#CC6677','#DDCC77','#332288'), pch = c(19,19,19),
          legend = c('single-locus Nei', 'common variants Nei', 'Koch MVN'), cex = 1.6)
   legend("topright", bty = "n", lwd = 0,
          legend = bquote(.(demes) ~ "demes"), cex = 1.6)
   for(i in c(1,3,5,7)){
-    lines(rep(floor((i - 1)/2) - .05, 2), c(lb1[i], ub1[i]), col = '#8c510a', lwd = 2)
-    lines(rep(floor((i - 1)/2), 2), c(lb2[i], ub2[i]), col = '#f1a340', lwd = 2)
-    lines(rep(floor((i - 1)/2) + .05, 2), c(lb3[i], ub3[i]), col = '#542788', lwd = 2)
+    lines(rep(floor((i - 1)/2) - .05, 2), c(lb1[i], ub1[i]), col = '#CC6677', lwd = 2)
+    lines(rep(floor((i - 1)/2), 2), c(lb2[i], ub2[i]), col = '#DDCC77', lwd = 2)
+    lines(rep(floor((i - 1)/2) + .05, 2), c(lb3[i], ub3[i]), col = '#332288', lwd = 2)
   }
 }
 
@@ -930,10 +928,10 @@ getLocusNull <- function(i, model){
        ylim=c(0,15),
        xlab = "", ylab = "", yaxt = "n", cex.lab=2, cex.axis=1.5)
   axis(2, las = 1, cex.axis = 1.5)
-  lines(density(Fsts.Nei), col = '#8c510a', lwd = 1.5)
-  lines(density(Fsts.WC), col = '#01665e', lwd = 1.5)
-  lines(density(Fsts.Nei.cv), col = '#f1a340', lwd = 1.5)
-  lines(density(Fsts.WC.cv), col = '#a1dab4', lwd = 1.5)
+  lines(density(Fsts.Nei), col = '#CC6677', lwd = 2)
+  lines(density(Fsts.WC), col = '#117733', lwd = 2)
+  lines(density(Fsts.Nei.cv), col = '#DDCC77', lwd = 2)
+  lines(density(Fsts.WC.cv), col = '#AA4499', lwd = 2)
   title(ylab="Density", line=2.9, cex.lab=1.6)
   if (i == 1){title(xlab = expression(Q[ST]^RB ~"with 1 locus"), line=3.5, cex.lab=1.6)}
   else if (i == 2){title(xlab = expression(Q[ST]^PBS ~"with 1 locus"), line=3.5, cex.lab=1.6)}
@@ -972,7 +970,7 @@ for (model in c("split_star", "migration_island")){
 }
 par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-legend("bottom", bty = "n", col = c('#8c510a', '#01665e','#f1a340','#a1dab4'), lwd = 2, horiz = TRUE, xpd = TRUE,
+legend("bottom", bty = "n", col = c('#CC6677', '#117733','#DDCC77','#AA4499'), lwd = 2, horiz = TRUE, xpd = TRUE,
        legend = c("single-locus Nei", "single-locus WC", 'common variants Nei', 'common variants WC'),
        cex = 1.5)
 
@@ -1006,7 +1004,7 @@ for (demes in c(4,8,16)){
   }
   par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
   plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-  legend("bottom", bty = "n", col = c('#8c510a', '#01665e','#f1a340','#a1dab4'), lwd = 2, horiz = TRUE, xpd = TRUE,
+  legend("bottom", bty = "n", col = c('#CC6677', '#117733','#DDCC77','#AA4499'), lwd = 2, horiz = TRUE, xpd = TRUE,
          legend = c("single-locus Nei", "single-locus WC", 'common variants Nei', 'common variants WC'),
          cex = 1.5)
   
@@ -1026,11 +1024,11 @@ getLKMVN <- function(i, model){
        ylim=c(0,15),
        xlab = "", ylab = "", yaxt = "n", cex.lab=2, cex.axis=1.5)
   axis(2, las = 1, cex.axis = 1.5)
-  lines(Fstat, lknra.dens, col = '#d01c8b', lwd = 1.5)
-  lines(Fstat, lknar.dens, col = '#998ec3', lwd = 1.5)
-  lines(Fstat, lkwra.dens, col = '#ef8a62', lwd = 1.5)
-  lines(Fstat, lkwar.dens, col = '#1b9e77', lwd = 1.5)
-  lines(density(Koch.mvn), col = '#542788', lwd = 1.5)
+  lines(Fstat, lknra.dens, col = '#88CCEE', lwd = 2)
+  lines(Fstat, lknar.dens, col = '#882255', lwd = 2)
+  lines(Fstat, lkwra.dens, col = '#999933', lwd = 2)
+  lines(Fstat, lkwar.dens, col = '#44AA99', lwd = 2)
+  lines(density(Koch.mvn), col = '#332288', lwd = 2)
   title(ylab="Density", line=2.9, cex.lab=1.6)
   if (i == 1){title(xlab = expression(Q[ST]^RB ~"with 1 locus"), line=3.5, cex.lab=1.6)}
   else if (i == 2){title(xlab = expression(Q[ST]^PBS ~"with 1 locus"), line=3.5, cex.lab=1.6)}
@@ -1073,7 +1071,7 @@ for (model in c("split_star", "migration_island")){
 }
 par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-legend("bottom", bty = "n", col = c('#d01c8b','#998ec3','#ef8a62','#1b9e77','#542788'), lwd = 2, horiz = TRUE, xpd = TRUE,
+legend("bottom", bty = "n", col = c('#88CCEE','#882255','#999933','#44AA99','#332288'), lwd = 2, horiz = TRUE, xpd = TRUE,
        legend = c('LK Nei RoA', 'LK Nei AoR', 'LK WC RoA', 'LK WC AoR', 'Koch MVN'),
        cex = 1.5)
 
@@ -1111,7 +1109,7 @@ for (demes in c(4,8,16)){
   }
   par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
   plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-  legend("bottom", bty = "n", col = c('#d01c8b','#998ec3','#ef8a62','#1b9e77','#542788'), lwd = 2, horiz = TRUE, xpd = TRUE,
+  legend("bottom", bty = "n", col = c('#88CCEE','#882255','#999933','#44AA99','#332288'), lwd = 2, horiz = TRUE, xpd = TRUE,
          legend = c('LK Nei RoA', 'LK Nei AoR', 'LK WC RoA', 'LK WC AoR', 'Koch MVN'),
          cex = 1.5)
   
